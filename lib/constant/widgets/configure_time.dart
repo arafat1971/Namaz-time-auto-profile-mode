@@ -53,7 +53,7 @@ class _ConfigureTimeState extends State<ConfigureTime> {
                 onTap: () async {
                   TimeOfDay? newTime = await showTimePicker(
                     context: context,
-                    initialTime: time!,
+                    initialTime: silentTime ?? time!,
                   );
                   if (newTime != null) {
                     setState(() {
@@ -95,8 +95,7 @@ class _ConfigureTimeState extends State<ConfigureTime> {
                 onTap: () async {
                   TimeOfDay? newTime = await showTimePicker(
                     context: context,
-                    // initialTime: ringingTime!,
-                    initialTime: time!,
+                    initialTime: ringingTime ?? time!,
                   );
                   if (newTime != null) {
                     setState(() {
