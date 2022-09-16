@@ -1,13 +1,16 @@
+import 'package:finalize_prayer_app/services/api_services.dart';
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationServices {
   Future<void> getLocation() async {
+    print('In get location');
     final prefs = await SharedPreferences.getInstance();
     List<String>? location_data = [];
     location_data = prefs.getStringList('locationData');
     Location location = Location();
     if (location_data == null || location_data.isEmpty) {
+      print('in if');
       bool serviceEnabled;
       PermissionStatus permissionGranted;
       LocationData locationData;
@@ -20,6 +23,8 @@ class LocationServices {
         }
       }
 
+      print('check');
+
       permissionGranted = await location.hasPermission();
       if (permissionGranted == PermissionStatus.denied) {
         permissionGranted = await location.requestPermission();
@@ -27,6 +32,7 @@ class LocationServices {
           return;
         }
       }
+      print('after permission');
 
       locationData = await location.getLocation();
       await prefs.setStringList('locationData',
@@ -36,6 +42,9 @@ class LocationServices {
 
       await prefs.setDouble('longitude', longitude);
       await prefs.setDouble('latitude', latitude);
+
+      final ApiServices apiServices = ApiServices();
+      apiServices.getPrayerTime(null);
     }
 
     location.onLocationChanged.listen((LocationData currentLocation) async {

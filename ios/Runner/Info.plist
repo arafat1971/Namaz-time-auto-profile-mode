@@ -45,5 +45,15 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- To enable location from package location -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<true/>
+	<!-- ___ -->
+	<!-- To enable background process from package flutter_background_service -->
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+    	<string>dev.flutter.background.refresh</string>
+	</array>
+	<!-- ___ -->
 </dict>
 </plist>

@@ -59,6 +59,13 @@ class AutoModeServices {
           cron.schedule(Schedule.parse('$ringingMins $ringingHour * * *'),
               () async {
             profileModeServices.setNormalMode();
+            //to ring the customize sound
+            Future.delayed(const Duration(seconds: 3), () async {
+              FlutterRingtonePlayer.play(fromAsset: "assets/water_drop.mp3");
+              localNotificationServices.showNotification(
+                  id: 0, title: 'Namaz Time', body: 'Ringing mode activated');
+            });
+            FlutterRingtonePlayer.stop();
             debugPrint('Ringing ----> $ringingHour $ringingMins');
           });
         }
